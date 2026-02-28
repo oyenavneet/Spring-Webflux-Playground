@@ -1,8 +1,6 @@
 package com.oyenavneet.playground.sec03.entity;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 public class Customer {
 
