@@ -64,3 +64,71 @@ It provides non-blocking drivers for popular databases like PostgreSQL, MySQL, M
 - Prefer writing SQL for complex queries
 
 ---
+
+## Reactive API, Validation, Exception Handling & Integration Testing
+
+### Spring WebFlux
+- Build non-blocking REST APIs
+- Uses `Mono` (0..1) and `Flux` (0…N)
+- Event-loop model (better scalability)
+
+### ReactiveCrudRepository
+- Reactive version of `CrudRepository`
+- Returns `Mono` and `Flux`
+- Supports basic CRUD operations
+- Works with Spring Data R2DBC
+
+### Validation
+- Use `@Valid` on request body
+- Use annotations like `@NotNull`, `@Size`, `@Email`
+- Validation errors handled reactively
+
+### Global Exception Handling
+- Use `@ControllerAdvice`
+- Use `@ExceptionHandler` methods
+- Return `Mono<ResponseEntity<?>>`
+- Centralized error handling for APIs
+
+### Integration Testing
+- `@SpringBootTest` – Loads full application context
+- `@AutoConfigureWebTestClient` – Enables `WebTestClient`
+- Use `WebTestClient` to test reactive endpoints
+- Supports non-blocking API testing
+
+---
+
+## WebFilter - Spring WebFlux
+
+### Purpose
+- Handles cross-cutting concerns:
+    - Authentication
+    - Authorization
+    - Logging
+    - Monitoring
+    - Rate Limiting
+    - Request/Response modification
+
+### How It Works
+- Executes before and/or after the controller
+- Intercepts every incoming request
+- Can modify `ServerWebExchange`
+- Must return `Mono<Void>`
+
+### Filter Chaining
+- Multiple `WebFilter` can be chained
+- Executed in defined order (`@Order`)
+- Each filter must call `chain.filter(exchange)` to continue flow
+- Can stop the request by not calling the chain
+
+### WebFilter Attributes
+- Use `exchange.getAttributes()` to store/retrieve data
+- Share data between filters and controllers
+- Useful for:
+    - Storing authenticated user details
+    - Request metadata
+    - Correlation IDs
+
+---
+
+
+
