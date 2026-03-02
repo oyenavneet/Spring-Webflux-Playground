@@ -130,5 +130,40 @@ It provides non-blocking drivers for popular databases like PostgreSQL, MySQL, M
 
 ---
 
+## Functional Endpoints
+
+Functional Endpoints are an alternative way to expose APIs in Spring WebFlux  
+(besides using `@RestController` and annotation-based mapping).
+
+### Key Components
+
+- **RouterFunction**
+    - Defines routes (URL + HTTP method)
+    - Maps request to handler function
+
+- **HandlerFunction**
+    - Contains business logic
+    - Returns `Mono<ServerResponse>`
+
+- **ServerRequest**
+    - Represents incoming request
+
+- **ServerResponse**
+    - Represents outgoing response
+
+### Features
+
+- Fully functional programming style
+- More control over routing
+- Lightweight and flexible
+- Good for modular or highly customized APIs
+
+### When to Use
+
+- When you prefer functional style over annotations
+- When building lightweight reactive services
+- When you need fine-grained routing control
+
+
 
 
