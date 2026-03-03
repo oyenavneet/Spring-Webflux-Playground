@@ -164,6 +164,30 @@ Functional Endpoints are an alternative way to expose APIs in Spring WebFlux
 - When building lightweight reactive services
 - When you need fine-grained routing control
 
+---
+
+## WebClient
+
+`WebClient` is a reactive HTTP client provided by Spring WebFlux.
+
+### Overview
+- Reactor-based fluent API for making HTTP requests
+- Built on top of Reactor Netty
+- Supports both synchronous (block) and asynchronous usage
+- Replaces `RestTemplate` in reactive applications
+
+### Key Features
+- Non-blocking and reactive
+- Immutable (each configuration returns a new instance)
+- Thread-safe
+- Supports streaming responses (`Flux`)
+- Handles backpressure
+
+### Common Use Cases
+- Calling external REST APIs
+- Microservice-to-microservice communication
+- Consuming streaming APIs
+
 
 
 
