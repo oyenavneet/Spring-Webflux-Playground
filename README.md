@@ -188,6 +188,46 @@ Functional Endpoints are an alternative way to expose APIs in Spring WebFlux
 - Microservice-to-microservice communication
 - Consuming streaming APIs
 
+---
+
+## Reactive Data Stream
+
+Reactive Data Stream is a non-blocking, asynchronous data flow model that supports streaming, backpressure, and real-time communication between systems.
+
+### Streaming Advantages
+- We will set up connection once and keep sending the message in a streaming fashion.
+- No need to wait for previous request to complete
+- Reduce network trafic/latency
+- You can use JSON to create a product/item
+
+Reactive systems support different communication patterns between client and server.
+
+### Communication Patterns
+
+#### 1. Request → Response
+- Client sends one request
+- Server returns one response (`Mono`)
+- Example: Get user by ID
+
+#### 2. Request → Streaming Response
+- Client sends one request
+- Server returns multiple values over time (`Flux`)
+- Example: Get all users, live updates, event stream
+
+#### 3. Streaming Request → Response
+- Client sends multiple values (stream)
+- Server processes all and returns single response (`Mono`)
+- Example: Upload multiple records and return summary
+
+#### 4. Bidirectional Streaming
+- Client and server both send streams
+- Both sides communicate continuously
+- Example: Chat application, real-time notifications
+- Returning Flux of stream, i.g: return this.productService.saveProduct(flux);
+
+> These patterns are common in Reactive systems and protocols like WebSocket and RSocket.
+
+
 
 
 
