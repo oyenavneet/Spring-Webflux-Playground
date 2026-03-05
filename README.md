@@ -227,6 +227,15 @@ Reactive systems support different communication patterns between client and ser
 
 > These patterns are common in Reactive systems and protocols like WebSocket and RSocket.
 
+---
+
+## Server-Sent Events (SSE / EventSource) - Using WebFlux (Sinks)
+
+- SSE is a mechanism where the **server continuously pushes events to the client over HTTP**
+- Used for **real-time updates from backend to frontend**
+- **One-way communication** (server → client only)
+- In WebFlux, **`Sinks`** can be used to emit events to a `Flux` stream that is sent to clients
+
 
 
 
