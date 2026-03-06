@@ -236,7 +236,53 @@ Reactive systems support different communication patterns between client and ser
 - **One-way communication** (server → client only)
 - In WebFlux, **`Sinks`** can be used to emit events to a `Flux` stream that is sent to clients
 
+---
 
+## Performance Optimization Techniques
 
+- **Gzip Compression** : Reduces response size to improve network performance
+  - Is good when response size in > 100KB, for small size it didn't work as expected
+  - ```
+    #Server Side Config in Spring-boot:
+    server.compression.enabled=true
+    server.compression.min-response-size=2048
+    server.compression.mime-types=application/json,application/xml
+    #Client Side: Is required to do the compression on server side
+    Accept-Encoding: gzip
+    ```
+- **Connection Pooling** : Reuses HTTP/TCP connections to reduce latency and resource usage
+  - ```
+    Netstat command to monitor the network connections
+    Mac/Linux: netstat -an| grep -w 127.0.0.1.7070
+    Windows: Get-NetTCPConnection -LocalAddress 127.0.0.1 -LocalPort 7070
 
+    To watch
+    Mac/Linux:watch 'netstat -an| grep -w 127.0.0.1.7070'
+    Windows:
+    while($true) { 
+      Clear-Host; 
+      Get-Date; 
+      netstat -an | findstr /c:"127.0.0.1:7070"; 
+      Start-Sleep -Seconds 2 
+    }
+  ```
+- **HTTP/2** : Supports multiplexing, header compression, and better network efficiency
+  - HTTP2 is Binary Protocol 
+  - HTTP2 Need only one connection to handle multiple Request
+  - Client need send which protocol it wants to use
+  - ```
+    #Property to enable HTTP2 in Spring-boot application
+    server.http2.enabled=true
+    ```
+- **subscribeOn** : Moves blocking I/O operations to a separate scheduler to avoid blocking event-loop threads
+  - While developing reactive app, use reactive libraries for you app, like R2DBC, mongo, redis, Kafka etc. 
+  - If using some library which didn't have dedicated library for reactive system, there use subscribeOn like below
+  - ```
+    Mono.fromSupplier(() -> someLibrary.invokeMethod())
+    .....
+       .subscribeOne(Schedulers.boundedElastic())
+    ```
+
+---
+ 
 
